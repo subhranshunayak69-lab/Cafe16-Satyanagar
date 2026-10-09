@@ -10,6 +10,7 @@
 
   body {
     @apply bg-[#17130f] text-stone-100 font-sans antialiased selection:bg-amber-500 selection:text-black;
+    background-image: radial-gradient(circle at top, rgba(128, 94, 57, 0.12), transparent 38%), linear-gradient(180deg, #17130f 0%, #100d0b 100%);
     font-feature-settings: "kern";
   }
 }
