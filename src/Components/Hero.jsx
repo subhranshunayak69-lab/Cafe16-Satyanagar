@@ -1,133 +1,67 @@
-import React, { useState } from 'react';
-import { Sparkles, ChevronRight, Star, Clock, MapPin, Coffee, Award } from 'lucide-react';
+import { ArrowDown, ArrowUpRight, Clock3, MapPin, Star } from 'lucide-react';
 
 export default function Hero({ setActiveTab }) {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-
-  const handleMouseMove = (e) => {
-    const { clientX, clientY } = e;
-    const { innerWidth, innerHeight } = window;
-    // Calculate normalized offset from center (-1 to 1)
-    const x = (clientX - innerWidth / 2) / (innerWidth / 2);
-    const y = (clientY - innerHeight / 2) / (innerHeight / 2);
-    setMousePos({ x, y });
-  };
-
   return (
-    <section 
-      onMouseMove={handleMouseMove}
-      className="relative min-h-[90vh] flex items-center justify-center px-4 lg:px-8 py-16 overflow-hidden border-b border-stone-800/80"
-    >
-      {/* AMBIENT BACKGROUND GRADIENT */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-amber-950/25 via-stone-950 to-stone-950 -z-10" />
-      
-      {/* FLOATING DECORATIVE BACKGROUND OVERLAYS WITH MOUSE PARALLAX */}
-      <div 
-        className="hidden lg:block absolute top-12 left-10 w-64 h-64 rounded-3xl overflow-hidden border border-amber-500/20 shadow-2xl shadow-amber-500/10 pointer-events-none transition-transform duration-300 ease-out opacity-80"
-        style={{
-          transform: `translate3d(${mousePos.x * -20}px, ${mousePos.y * -20}px, 0) rotate(-6deg)`,
-        }}
-      >
-        <img 
-          src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&q=80&w=600" 
-          alt="Chelo Kabab Platter" 
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent p-4 flex flex-col justify-end">
-          <span className="text-[10px] font-bold tracking-wider text-amber-400 uppercase">Bungalow Signature</span>
-          <p className="text-xs font-semibold text-white">Chelo Kabab Chicken Platter</p>
+    <section className="hero-section relative isolate flex min-h-[710px] items-center overflow-hidden sm:min-h-[780px]" id="home">
+      <img
+        src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=90&w=2200"
+        alt="Warmly lit heritage café with intimate dining tables"
+        className="absolute inset-0 -z-20 h-full w-full object-cover object-center"
+      />
+      <div className="hero-scrim absolute inset-0 -z-10" />
+      <div className="absolute inset-0 -z-10 opacity-20 [background-image:linear-gradient(90deg,rgba(20,14,9,.6)_1px,transparent_1px),linear-gradient(rgba(20,14,9,.6)_1px,transparent_1px)] [background-size:80px_80px]" />
+
+      <div className="mx-auto grid w-full max-w-[1440px] items-end gap-12 px-5 pb-14 pt-32 sm:px-8 sm:pb-20 lg:grid-cols-[minmax(0,1fr)_280px] lg:px-14">
+        <div className="max-w-4xl">
+          <div className="mb-7 flex items-center gap-3 text-[10px] font-medium uppercase tracking-[.28em] text-[#e9c895] sm:text-xs">
+            <span className="h-px w-10 bg-[#c5a36a]" />
+            A heritage bungalow in Satyanagar
+          </div>
+          <h1 className="max-w-4xl font-serif text-[clamp(3.4rem,9vw,8rem)] font-medium leading-[.94] tracking-[-.055em] text-[#fffaf2]">
+            Come in for
+            <br />
+            <span className="italic text-[#d6b47c]">a little while.</span>
+          </h1>
+          <p className="mt-7 max-w-lg text-sm leading-7 text-[#e5ded4] sm:text-base sm:leading-8">
+            A table beneath the old trees. Coffee made slowly. The kind of evening you wish would last a little longer.
+          </p>
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+            <button
+              type="button"
+              onClick={() => setActiveTab('menu')}
+              className="inline-flex min-h-14 items-center justify-center gap-3 bg-[#bd9257] px-7 text-sm font-semibold text-[#1d1710] transition hover:bg-[#d4b27c]"
+            >
+              Explore the menu <ArrowUpRight className="h-4 w-4" />
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab('reservation')}
+              className="inline-flex min-h-14 items-center justify-center gap-3 border border-white/35 bg-black/15 px-7 text-sm font-medium text-white backdrop-blur-sm transition hover:border-[#d6b47c] hover:text-[#e4c797]"
+            >
+              Find your table
+            </button>
+          </div>
         </div>
+
+        <aside className="hidden border-l border-white/30 pb-1 pl-7 text-white lg:block">
+          <div className="flex items-center gap-2 text-sm text-[#e5ca9d]">
+            <Star className="h-4 w-4 fill-current" /> 4.2 <span className="text-white/55">· 2,200+ guest reviews</span>
+          </div>
+          <div className="mt-6 flex items-center gap-3 text-xs leading-5 text-white/80">
+            <MapPin className="h-4 w-4 shrink-0 text-[#d6b47c]" />
+            Satyanagar, Bhubaneswar
+          </div>
+          <div className="mt-3 flex items-center gap-3 text-xs leading-5 text-white/80">
+            <Clock3 className="h-4 w-4 shrink-0 text-[#d6b47c]" />
+            Open daily · till late
+          </div>
+        </aside>
       </div>
 
-      <div 
-        className="hidden lg:block absolute bottom-12 right-12 w-60 h-60 rounded-3xl overflow-hidden border border-amber-500/20 shadow-2xl shadow-amber-500/10 pointer-events-none transition-transform duration-300 ease-out opacity-80"
-        style={{
-          transform: `translate3d(${mousePos.x * 25}px, ${mousePos.y * 25}px, 0) rotate(5deg)`,
-        }}
-      >
-        <img 
-          src="https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&q=80&w=600" 
-          alt="Espresso Hot Chocolate" 
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent p-4 flex flex-col justify-end">
-          <span className="text-[10px] font-bold tracking-wider text-amber-400 uppercase">Specialty Brew</span>
-          <p className="text-xs font-semibold text-white">Espresso Hot Chocolate</p>
-        </div>
-      </div>
-
-      {/* HERO MAIN CONTENT */}
-      <div className="max-w-4xl text-center space-y-8 relative z-10">
-        
-        {/* BRAND BADGE */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs sm:text-sm tracking-wide font-medium shadow-inner">
-          <Sparkles className="w-4 h-4" /> 
-          <span>Repurposed 50-Year-Old Vintage Bungalow & Garden Lawn</span>
-        </div>
-
-        {/* HEADLINE */}
-        <h1 className="font-serif text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.15]">
-          Where Vintage Nostalgia Meets <br className="hidden sm:inline" />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-amber-500 to-amber-200 italic">
-            Gourmet Brews
-          </span>
-        </h1>
-
-        {/* SUBTITLE */}
-        <p className="text-stone-300 text-base sm:text-lg lg:text-xl max-w-2xl mx-auto font-light leading-relaxed">
-          Relax under fairy-lit outdoor garden lawns, browse curated reads from our Bakul Foundation mini-library, and relish authentic Iranian Chelo Kababs & artisanal coffee.
-        </p>
-
-        {/* CTA BUTTON GROUP */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
-          <button
-            onClick={() => setActiveTab('menu')}
-            className="w-full sm:w-auto bg-amber-500 hover:bg-amber-400 text-black font-semibold px-8 py-4 rounded-full flex items-center justify-center gap-2 text-base transition-all shadow-xl shadow-amber-500/20 hover:scale-105 active:scale-95"
-          >
-            <span>Explore Menu & Order</span>
-            <ChevronRight className="w-5 h-5" />
-          </button>
-          
-          <button
-            onClick={() => setActiveTab('reservation')}
-            className="w-full sm:w-auto border border-stone-700 hover:border-amber-500 text-white hover:text-amber-400 font-medium px-8 py-4 rounded-full text-base transition-all hover:bg-stone-900/80 active:scale-95"
-          >
-            Reserve Garden Table
-          </button>
-        </div>
-
-        {/* METRICS & QUICK HIGHLIGHTS */}
-        <div className="pt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto border-t border-stone-800/80">
-          <div className="p-3 text-center">
-            <div className="flex items-center justify-center gap-1 text-amber-400 font-bold text-lg sm:text-xl font-serif">
-              <Star className="w-4 h-4 fill-amber-400" /> 4.2 / 5
-            </div>
-            <p className="text-stone-500 text-xs mt-1">2,200+ Reviews</p>
-          </div>
-
-          <div className="p-3 text-center border-l border-stone-800/60">
-            <div className="text-amber-400 font-bold text-lg sm:text-xl font-serif">
-              ₹500 - ₹800
-            </div>
-            <p className="text-stone-500 text-xs mt-1">Avg. Cost for Two</p>
-          </div>
-
-          <div className="p-3 text-center border-l border-stone-800/60">
-            <div className="text-amber-400 font-bold text-lg sm:text-xl font-serif flex items-center justify-center gap-1">
-              <Clock className="w-4 h-4" /> 10 AM - 10 PM
-            </div>
-            <p className="text-stone-500 text-xs mt-1">Open 7 Days</p>
-          </div>
-
-          <div className="p-3 text-center border-l border-stone-800/60">
-            <div className="text-amber-400 font-bold text-lg sm:text-xl font-serif flex items-center justify-center gap-1">
-              <MapPin className="w-4 h-4" /> Satya Nagar
-            </div>
-            <p className="text-stone-500 text-xs mt-1">Bhubaneswar, Odisha</p>
-          </div>
-        </div>
-
-      </div>
+      <a href="#story" className="absolute bottom-7 left-1/2 hidden -translate-x-1/2 items-center gap-2 text-[9px] uppercase tracking-[.25em] text-white/70 transition hover:text-white md:flex">
+        Take a look around <ArrowDown className="h-3.5 w-3.5" />
+      </a>
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c5a36a]/70 to-transparent" />
     </section>
   );
 }

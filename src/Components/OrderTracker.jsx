@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
   CheckCircle2,
   Clock,
@@ -9,14 +9,13 @@ import {
   MessageCircle,
   ShoppingBag,
   ArrowRight,
-  AlertCircle
 } from 'lucide-react';
 
 export default function OrderTracker({ currentOrder, onBackToMenu }) {
   // Demo order fallback if no active order is passed via props
   const defaultOrder = {
     orderId: 'C16-ORD-849201',
-    customerName: 'Subhranshu Nayak',
+    customerName: 'Cafe 16 guest',
     orderType: 'Dine-in', // 'Dine-in', 'Takeaway', 'Delivery'
     tableNumber: 'Table 4 (Garden Fairy Lights)',
     placedAt: '08:15 PM',
@@ -84,9 +83,7 @@ export default function OrderTracker({ currentOrder, onBackToMenu }) {
   };
 
   const handleSupportWhatsApp = () => {
-    const msg = encodeURIComponent(
-      `Hello Cafe 16 Satyanagar, I need help with my Order ID: ${activeOrder.orderId}`
-    );
+    const msg = encodeURIComponent('Hello Cafe 16 Satyanagar, I have a question about visiting the cafe.');
     window.open(`https://wa.me/917978060887?text=${msg}`, '_blank');
   };
 
@@ -101,7 +98,7 @@ export default function OrderTracker({ currentOrder, onBackToMenu }) {
           <div>
             <div className="flex items-center gap-2">
               <span className="text-xs font-bold tracking-widest text-amber-500 uppercase bg-amber-500/10 border border-amber-500/20 px-3 py-1 rounded-full">
-                Live Status
+                Demo Tracking
               </span>
               <span className="text-stone-500 text-xs">• Order ID: <strong className="text-stone-300">{activeOrder.orderId}</strong></span>
             </div>
@@ -110,6 +107,9 @@ export default function OrderTracker({ currentOrder, onBackToMenu }) {
             </h2>
             <p className="text-stone-400 text-xs sm:text-sm mt-1">
               For <strong className="text-stone-200">{activeOrder.customerName}</strong> ({activeOrder.orderType} {activeOrder.tableNumber ? `• ${activeOrder.tableNumber}` : ''})
+            </p>
+            <p className="mt-2 text-[11px] leading-5 text-stone-500">
+              Frontend demonstration only · order progress is simulated and is not connected to the cafe kitchen.
             </p>
           </div>
 
@@ -189,7 +189,7 @@ export default function OrderTracker({ currentOrder, onBackToMenu }) {
           </div>
 
           <div className="pt-4 border-t border-stone-800 flex justify-between items-center text-sm">
-            <span className="text-stone-400">Total Paid ({activeOrder.paymentMethod})</span>
+            <span className="text-stone-400">Demo total · {activeOrder.paymentMethod} selected</span>
             <span className="font-serif font-bold text-xl text-amber-400">₹{activeOrder.totalAmount}</span>
           </div>
         </div>
@@ -201,7 +201,7 @@ export default function OrderTracker({ currentOrder, onBackToMenu }) {
               Need Assistance?
             </h3>
             <p className="text-stone-400 text-xs font-light leading-relaxed">
-              Have a special request for the kitchen or need water refill at your table?
+              This tracker is a frontend demo, not connected to the cafe. Contact our team with a general question about your visit.
             </p>
 
             <div className="mt-4 space-y-2">
@@ -209,7 +209,7 @@ export default function OrderTracker({ currentOrder, onBackToMenu }) {
                 onClick={handleSupportWhatsApp}
                 className="w-full bg-stone-950 hover:bg-stone-800 border border-stone-800 text-stone-200 font-medium py-2.5 rounded-xl text-xs flex items-center justify-center gap-2 transition-colors"
               >
-                <MessageCircle className="w-4 h-4 text-green-400" /> WhatsApp Host
+                <MessageCircle className="w-4 h-4 text-green-400" /> WhatsApp Cafe 16
               </button>
               <button
                 onClick={handleSupportCall}

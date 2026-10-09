@@ -1,115 +1,65 @@
-import React from 'react';
-import { BookOpen, TreePine, Heart, Sparkles, Coffee, Compass, CheckCircle2 } from 'lucide-react';
-import Carousel from './Carousel.jsx';
+import { BookOpen, Heart, Leaf, MoveUpRight } from 'lucide-react';
+
+const details = [
+  { icon: BookOpen, title: 'A corner for quiet pages', text: 'Pick a book from the Bakul Foundation mini-library and let the afternoon unfold.' },
+  { icon: Leaf, title: 'Outside, under the trees', text: 'A garden lawn made for unhurried suppers, soft lights and long conversations.' },
+  { icon: Heart, title: 'Made to feel like yours', text: 'Come with friends, bring your four-legged companion, stay for one more cup.' },
+];
 
 export default function Story() {
-  const highlights = [
-    {
-      title: '50-Year Heritage Bungalow',
-      description: 'Preserving old-world architecture with vintage brick accents, grand archways, and antique courtyard aesthetics.',
-      icon: Compass,
-    },
-    {
-      title: 'Bakul Mini-Library Partnership',
-      description: 'Partnered with Bakul Foundation to house hundreds of curated literary works for guests to enjoy with coffee.',
-      icon: BookOpen,
-    },
-    {
-      title: 'Fairy-Lit Garden Lawn',
-      description: 'Lush outdoor seating surrounded by greenery, soft ambient lighting, and serene open-air dining.',
-      icon: TreePine,
-    },
-    {
-      title: 'Pet-Friendly Sanctuary',
-      description: 'Open lawns and welcoming spaces where your pets can relax right beside you.',
-      icon: Heart,
-    },
-  ];
-
   return (
-    <section className="max-w-7xl mx-auto px-4 lg:px-8 py-16 space-y-16">
-      
-      {/* SECTION HEADER */}
-      <div className="text-center max-w-3xl mx-auto space-y-4">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-semibold tracking-wider uppercase">
-          <Sparkles className="w-3.5 h-3.5" /> Satyanagar Heritage
-        </div>
-        <h2 className="font-serif text-3xl sm:text-5xl font-extrabold text-white leading-tight">
-          A Converted Bungalow Steeped in Nostalgia & Coffee
-        </h2>
-        <p className="text-stone-300 text-base sm:text-lg font-light leading-relaxed">
-          More than just a café—Cafe 16 is a quiet sanctuary tucked away in Satyanagar, bridging Bhubaneswar's rich heritage with artisanal culinary traditions.
-        </p>
+    <section className="mx-auto max-w-[1440px] px-5 py-20 sm:px-8 sm:py-28 lg:px-14">
+      <div className="mb-12 flex items-center gap-3 text-[10px] uppercase tracking-[.24em] text-[#c5a36a] sm:text-xs">
+        <span className="h-px w-9 bg-[#c5a36a]" /> The house on Satyanagar Road
       </div>
-
-      {/* AMBIANCE CAROUSEL */}
-      <div>
-        <Carousel />
-      </div>
-
-      {/* STORY CONTENT GRID */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center pt-8">
-        
-        {/* LEFT TEXT STORY */}
-        <div className="space-y-6">
-          <h3 className="font-serif text-2xl sm:text-3xl font-bold text-white leading-snug">
-            Preserving the Charm of Vintage Bhubaneswar
-          </h3>
-          
-          <p className="text-stone-300 text-sm sm:text-base font-light leading-relaxed">
-            Housed inside a lovingly repurposed 50-year-old family bungalow, Cafe 16 was born out of a desire to create a slow-paced refuge amidst the bustling city. Original high ceilings, exposed brick walls, and shaded verandas have been restored to preserve its timeless residential warmth.
-          </p>
-
-          <p className="text-stone-300 text-sm sm:text-base font-light leading-relaxed">
-            Whether you choose to sip an iced caramel macchiato under our garden trees or lose yourself in a book from our <strong className="text-amber-400 font-semibold">Bakul Foundation</strong> collection, every corner is crafted for comfort and connection.
-          </p>
-
-          {/* CHECKMARKS */}
-          <div className="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm text-stone-200">
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0" />
-              <span>Authentic Iranian Chelo Kababs</span>
+      <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_.95fr] lg:gap-20">
+        <div className="relative">
+          <div className="relative aspect-[4/4.2] overflow-hidden sm:aspect-[1.1/1]">
+            <img
+              src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&q=85&w=1200"
+              alt="Sunlit café interior with warm wood and vintage details"
+              className="h-full w-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#17130f]/55 via-transparent to-transparent" />
+            <div className="absolute bottom-6 left-6 border-l border-[#e3c38e] pl-4 text-white sm:bottom-8 sm:left-8">
+              <p className="font-serif text-2xl italic">A little old soul.</p>
+              <p className="mt-1 text-[9px] uppercase tracking-[.2em] text-white/75">A familiar feeling, found again</p>
             </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0" />
-              <span>Specialty Cold Brews & Desserts</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0" />
-              <span>Private Booking Available</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0" />
-              <span>Free High-Speed Wi-Fi</span>
-            </div>
+          </div>
+          <div className="absolute -bottom-5 -right-3 hidden border border-[#c5a36a]/50 bg-[#201a14] px-6 py-5 text-center sm:block lg:-right-7">
+            <span className="block font-serif text-3xl text-[#e3c38e]">’50s</span>
+            <span className="mt-1 block text-[9px] uppercase tracking-[.17em] text-[#c4b9a9]">bungalow spirit</span>
           </div>
         </div>
 
-        {/* RIGHT HIGHLIGHT CARDS GRID */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {highlights.map((item, idx) => {
-            const Icon = item.icon;
-            return (
-              <div
-                key={idx}
-                className="bg-stone-900/80 border border-stone-800 p-6 rounded-2xl space-y-3 hover:border-amber-500/40 transition-all duration-300 group"
-              >
-                <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 group-hover:bg-amber-500 group-hover:text-black transition-colors">
-                  <Icon className="w-5 h-5" />
+        <div className="pt-3 lg:pl-2">
+          <p className="text-xs uppercase tracking-[.19em] text-[#c5a36a]">Not just another coffee stop</p>
+          <h2 className="mt-5 max-w-xl font-serif text-4xl font-medium leading-[1.12] tracking-[-.035em] text-[#f5eee2] sm:text-5xl lg:text-[3.6rem]">
+            A bungalow with room to <span className="italic text-[#d1af78]">breathe.</span>
+          </h2>
+          <p className="mt-6 max-w-xl text-sm leading-7 text-[#c8c0b5] sm:text-base sm:leading-8">
+            In the middle of Bhubaneswar, behind an old familiar doorway, there’s a place to slow down. Cafe 16 brings the warmth of a lived-in home to a lovingly reimagined bungalow—where good food, thoughtful coffee and a little nostalgia share the same table.
+          </p>
+          <p className="mt-4 max-w-xl text-sm leading-7 text-[#a9a095]">
+            Drop in after work, settle in with a book, or make an evening of our garden. We’ll put the kettle on.
+          </p>
+
+          <div className="mt-9 border-t border-white/10">
+            {details.map(({ icon: Icon, title, text }) => (
+              <article key={title} className="flex gap-4 border-b border-white/10 py-5">
+                <Icon className="mt-1 h-4 w-4 shrink-0 text-[#c5a36a]" strokeWidth={1.5} />
+                <div>
+                  <h3 className="font-serif text-lg text-[#f1e7d8]">{title}</h3>
+                  <p className="mt-1 text-xs leading-5 text-[#a9a095]">{text}</p>
                 </div>
-                <h4 className="font-serif font-bold text-white text-base">
-                  {item.title}
-                </h4>
-                <p className="text-stone-400 text-xs font-light leading-relaxed">
-                  {item.description}
-                </p>
-              </div>
-            );
-          })}
+              </article>
+            ))}
+          </div>
+          <a href="#gallery" className="mt-7 inline-flex items-center gap-2 text-xs font-medium tracking-wide text-[#dfc18f] transition hover:text-white">
+            Take a look around <MoveUpRight className="h-3.5 w-3.5" />
+          </a>
         </div>
-
       </div>
-
     </section>
   );
 }

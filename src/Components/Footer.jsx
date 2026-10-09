@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   MapPin,
   Phone,
@@ -7,7 +6,6 @@ import {
   Instagram,
   Facebook,
   Heart,
-  Coffee,
   Sparkles,
   ArrowUp
 } from 'lucide-react';
@@ -77,18 +75,17 @@ export default function Footer({ onNavigate }) {
             </h4>
             <ul className="space-y-2.5 text-xs">
               {[
+                { label: 'Our Story', page: 'story' },
                 { label: 'Artisan Menu', page: 'menu' },
                 { label: 'Table Reservation', page: 'reservation' },
                 { label: 'Visual Gallery', page: 'gallery' },
                 { label: 'Guest Reviews', page: 'reviews' },
                 { label: 'Order Tracking', page: 'tracker' },
+                { label: 'Team Portal Demo', page: 'workforce' },
               ].map((link) => (
                 <li key={link.page}>
                   <button
-                    onClick={() => {
-                      if (onNavigate) onNavigate(link.page);
-                      scrollToTop();
-                    }}
+                    onClick={() => onNavigate?.(link.page)}
                     className="hover:text-amber-400 transition-colors flex items-center gap-2"
                   >
                     <span className="text-amber-500/60">›</span> {link.label}

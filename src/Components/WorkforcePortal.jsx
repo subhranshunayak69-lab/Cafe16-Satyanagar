@@ -149,6 +149,12 @@ export default function WorkforcePortal({ authRole, setAuthRole, tasks = INITIAL
             {loginError && <p role="alert" className="flex items-center gap-2 text-sm text-red-300"><AlertCircle className="h-4 w-4 shrink-0" />{loginError}</p>}
             <button className="w-full rounded-xl bg-amber-500 px-4 py-3 font-semibold text-stone-950 transition hover:bg-amber-400" type="submit">Sign in</button>
           </form>
+          <p className="mt-5 rounded-xl border border-stone-800 bg-stone-950/70 p-3 text-center text-xs leading-5 text-stone-400">
+            Demo only · Staff <span className="text-stone-200">staff / 1010</span>
+            <span className="mx-2 text-stone-700">|</span>
+            Manager <span className="text-stone-200">manager / 1616</span>
+          </p>
+          <p className="mt-3 text-center text-[10px] leading-4 text-stone-600">Demonstration interface only. Do not enter real employee information.</p>
         </div>
       </section>
     );

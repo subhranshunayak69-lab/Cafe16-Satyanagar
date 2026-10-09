@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import CartDrawer from './Components/CartDrawer.jsx';
 import CheckoutModal from './Components/CheckoutModal.jsx';
 import FoodModal from './Components/FoodModal.jsx';
@@ -29,6 +29,25 @@ export default function App() {
   const [authRole, setAuthRole] = useState(null);
   const [workforceTasks, setWorkforceTasks] = useState(INITIAL_WORKFORCE_TASKS);
 
+  useEffect(() => {
+    const sectionIds = ['home', 'story', 'menu', 'reservation', 'gallery', 'reviews', 'tracker', 'workforce'];
+    const sections = sectionIds.map((id) => document.getElementById(id)).filter(Boolean);
+    const observer = new IntersectionObserver((entries) => {
+      const visibleSection = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((first, second) => second.intersectionRatio - first.intersectionRatio)[0];
+      if (visibleSection) setActiveTab(visibleSection.target.id);
+    }, { rootMargin: '-18% 0px -68% 0px', threshold: [0, 0.1, 0.3] });
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
+
+  const navigateTo = (sectionId) => {
+    setActiveTab(sectionId);
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
   const grandTotal = useMemo(() => {
     const subtotal = cart.reduce((total, item) => total + item.price * item.quantity, 0);
@@ -53,38 +72,40 @@ export default function App() {
       .filter((item) => item.quantity > 0));
   };
 
-  const placeOrder = () => {
+  const placeOrder = (checkoutDetails = {}) => {
     setActiveOrder({
-      orderId: `C16-ORD-${Math.floor(100000 + Math.random() * 900000)}`,
-      customerName: 'Guest',
-      orderType: 'Dine-in',
+      orderId: checkoutDetails.orderId || `C16-ORD-${Math.floor(100000 + Math.random() * 900000)}`,
+      customerName: checkoutDetails.customerInfo?.name || 'Guest',
+      orderType: checkoutDetails.orderType || 'Dine-in',
+      tableNumber: checkoutDetails.orderType === 'Dine-in' ? checkoutDetails.tableNumber : undefined,
       placedAt: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       estimatedTime: '20 mins',
       items: cart.map(({ name, quantity, price }) => ({ name, quantity, price })),
-      totalAmount: grandTotal,
-      paymentMethod: 'At cafe',
+      totalAmount: checkoutTotal || grandTotal,
+      paymentMethod: checkoutDetails.paymentMethod || 'Pay at counter',
     });
     setCart([]);
     setIsCheckoutOpen(false);
-    setActiveTab('tracker');
-  };
-
-  const pages = {
-    home: <Hero setActiveTab={setActiveTab} />,
-    menu: <Menu menuItems={menuItems} addToCart={addToCart} onOpenDishModal={setActiveModalDish} />,
-    story: <Story />,
-    reservation: <Reservation />,
-    reviews: <Reviews />,
-    gallery: <Gallery />,
-    tracker: <OrderTracker currentOrder={activeOrder} onBackToMenu={() => setActiveTab('menu')} />,
-    workforce: <WorkforcePortal authRole={authRole} setAuthRole={setAuthRole} tasks={workforceTasks} setTasks={setWorkforceTasks} />,
+    navigateTo('tracker');
   };
 
   return (
-    <div className="min-h-screen bg-stone-950 text-stone-100 flex flex-col">
-      <Navbar activeTab={activeTab} setActiveTab={setActiveTab} cartCount={cartCount} setIsCartOpen={setIsCartOpen} />
-      <main className="flex-1">{pages[activeTab] || pages.home}</main>
-      <Footer onNavigate={setActiveTab} />
+    <div className="min-h-screen bg-[#17130f] text-stone-100">
+      <Navbar activeTab={activeTab} setActiveTab={navigateTo} cartCount={cartCount} setIsCartOpen={setIsCartOpen} />
+      <main>
+        <Hero setActiveTab={navigateTo} />
+        <div id="story" className="scroll-mt-24"><Story /></div>
+        <div className="section-rule" />
+        <div id="menu" className="scroll-mt-24"><Menu menuItems={menuItems} addToCart={addToCart} onOpenDishModal={setActiveModalDish} /></div>
+        <div id="reservation" className="scroll-mt-24 bg-[#201a14] py-5"><Reservation /></div>
+        <div id="gallery" className="scroll-mt-24"><Gallery /></div>
+        <div id="reviews" className="scroll-mt-24 bg-[#201a14]"><Reviews /></div>
+        <div id="tracker" className="scroll-mt-24"><OrderTracker currentOrder={activeOrder} onBackToMenu={() => navigateTo('menu')} /></div>
+        <div id="workforce" className="scroll-mt-24 border-t border-[#d1af78]/15 bg-[#1b1611]">
+          <WorkforcePortal authRole={authRole} setAuthRole={setAuthRole} tasks={workforceTasks} setTasks={setWorkforceTasks} />
+        </div>
+      </main>
+      <Footer onNavigate={navigateTo} />
 
       {isCartOpen && (
         <CartDrawer
@@ -99,7 +120,6 @@ export default function App() {
         <CheckoutModal
           isOpen={isCheckoutOpen}
           onClose={() => setIsCheckoutOpen(false)}
-          cart={cart}
           grandTotal={checkoutTotal || grandTotal}
           clearCart={placeOrder}
         />

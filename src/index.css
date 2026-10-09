@@ -3,22 +3,75 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
   body {
-    @apply bg-[#0c0a09] text-stone-100 font-sans antialiased selection:bg-amber-500 selection:text-black;
+    @apply bg-[#17130f] text-stone-100 font-sans antialiased selection:bg-amber-500 selection:text-black;
+    font-feature-settings: "kern";
   }
 }
 
-/* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 7px;
 }
 ::-webkit-scrollbar-track {
-  background: #0c0a09;
+  background: #17130f;
 }
 ::-webkit-scrollbar-thumb {
-  background: #27272a;
-  border-radius: 4px;
+  background: #6d5940;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #d97706;
+  background: #c5a36a;
+}
+
+.hero-scrim {
+  background:
+    linear-gradient(90deg, rgba(20, 15, 11, .93) 0%, rgba(20, 15, 11, .77) 36%, rgba(20, 15, 11, .27) 76%, rgba(20, 15, 11, .2) 100%),
+    linear-gradient(0deg, rgba(20, 15, 11, .42), transparent 40%, rgba(20, 15, 11, .16));
+}
+
+.brand-mark {
+  background: radial-gradient(circle at 35% 28%, rgba(197, 163, 106, .18), transparent 62%);
+}
+
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  background: #c5a36a;
+  content: "";
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 180ms ease;
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+.section-rule {
+  height: 1px;
+  margin: 0 auto;
+  max-width: 1312px;
+  background: linear-gradient(90deg, transparent, rgba(197, 163, 106, .3), transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
 }

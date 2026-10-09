@@ -1,6 +1,6 @@
 # Cafe 16 Satyanagar
 
-A responsive restaurant website for Cafe 16 Satyanagar in Bhubaneswar. It includes a café landing page, menu browsing, reservations, reviews, a gallery, cart and checkout demonstrations, and a role-based workforce portal.
+A responsive, single-page restaurant website for Cafe 16 Satyanagar in Bhubaneswar. It includes a heritage bungalow story, menu browsing, reservations, reviews, an ambience gallery, cart and checkout demonstrations, order tracking, and a role-based workforce portal demo.
 
 ## Run locally
 
@@ -24,7 +24,7 @@ Vite prints the local preview URL in the terminal (usually `http://localhost:300
 
 ## Workforce portal demo
 
-Open **Team Portal** in the navigation and use one of these demo accounts:
+Open **Team Portal Demo** from the footer (or the mobile navigation) and use one of these demo accounts:
 
 | Role | Username | PIN |
 | --- | --- | --- |
@@ -49,7 +49,7 @@ Connect the GitHub repository to Vercel and deploy the `main` branch. Pushing ne
 src/
   Components/   React pages and interface components
   Data/         Menu data
-  App.jsx       Page routing and shared state
+  App.jsx       Single-page composition and shared cart/order state
   main.jsx      React entry point
   index.css     Tailwind CSS entry point
 ```

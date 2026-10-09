@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
-import { X, CheckCircle, CreditCard, Smartphone, Banknote, ShieldCheck, ShoppingBag, MapPin, Send, Sparkles } from 'lucide-react';
+import { useState } from 'react';
+import { X, CheckCircle, CreditCard, Smartphone, Banknote, ShieldCheck, ShoppingBag } from 'lucide-react';
 
-export default function CheckoutModal({ isOpen, onClose, cart, grandTotal, clearCart }) {
-  if (!isOpen) return null;
-
+export default function CheckoutModal({ isOpen, onClose, grandTotal, clearCart }) {
   const [orderType, setOrderType] = useState('Dine-in'); // 'Dine-in', 'Takeaway', 'Delivery'
   const [tableNumber, setTableNumber] = useState('Table 4 (Garden)');
   const [customerInfo, setCustomerInfo] = useState({
@@ -29,33 +27,17 @@ export default function CheckoutModal({ isOpen, onClose, cart, grandTotal, clear
     setOrderPlaced(true);
   };
 
-  const handleSendWhatsAppOrder = () => {
-    const itemDetails = cart
-      .map(
-        (item) =>
-          `• ${item.name} x ${item.quantity} - ₹${item.price * item.quantity}${
-            item.selectedCustomization
-              ? ` (${typeof item.selectedCustomization === 'string' ? item.selectedCustomization : item.selectedCustomization.name})`
-              : ''
-          }`
-      )
-      .join('\n');
-
-    const orderMsg = encodeURIComponent(
-      `*NEW ORDER RECEIVED - Cafe 16 Satyanagar*\n` +
-      `*Order ID:* ${orderId}\n` +
-      `*Order Type:* ${orderType} ${orderType === 'Dine-in' ? `(${tableNumber})` : ''}\n\n` +
-      `*Customer Name:* ${customerInfo.name}\n` +
-      `*Phone:* ${customerInfo.phone}\n` +
-      `${orderType === 'Delivery' ? `*Delivery Address:* ${customerInfo.address}\n` : ''}` +
-      `*Payment Method:* ${paymentMethod}\n\n` +
-      `*ITEMS:* \n${itemDetails}\n\n` +
-      `*TOTAL AMOUNT:* ₹${grandTotal}`
-    );
-
-    window.open(`https://wa.me/917978060887?text=${orderMsg}`, '_blank');
-    if (clearCart) clearCart();
+  const handleViewOrderStatus = () => {
+    clearCart?.({
+      orderId,
+      customerInfo,
+      orderType,
+      tableNumber,
+      paymentMethod,
+    });
   };
+
+  if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fade-in">
@@ -74,7 +56,7 @@ export default function CheckoutModal({ isOpen, onClose, cart, grandTotal, clear
                 {orderPlaced ? 'Order Confirmed' : 'Checkout & Payment'}
               </h2>
               <p className="text-xs text-stone-400">
-                {orderPlaced ? 'Thank you for dining with Cafe 16' : 'Complete your details to place order'}
+                {orderPlaced ? 'Your Cafe 16 ordering demo' : 'Preview the online ordering flow'}
               </p>
             </div>
           </div>
@@ -97,13 +79,13 @@ export default function CheckoutModal({ isOpen, onClose, cart, grandTotal, clear
 
               <div>
                 <span className="text-xs font-semibold tracking-wider text-amber-500 uppercase">
-                  Order Successfully Placed
+                  Demo Order Created
                 </span>
                 <h3 className="font-serif text-2xl font-bold text-white mt-1">
                   {orderId}
                 </h3>
                 <p className="text-stone-400 text-xs mt-2 max-w-sm mx-auto font-light">
-                  Your order has been sent to our kitchen. You will receive real-time status updates.
+                  No payment was processed and no order was sent to the cafe. The next screen simulates order progress.
                 </p>
               </div>
 
@@ -118,11 +100,11 @@ export default function CheckoutModal({ isOpen, onClose, cart, grandTotal, clear
                   <span className="font-semibold text-white">{customerInfo.name} ({customerInfo.phone})</span>
                 </div>
                 <div className="flex justify-between border-b border-stone-800/80 pb-2">
-                  <span className="text-stone-500">Payment:</span>
-                  <span className="font-semibold text-amber-400">{paymentMethod}</span>
+                  <span className="text-stone-500">Payment selection:</span>
+                  <span className="font-semibold text-amber-400">{paymentMethod} · demo only</span>
                 </div>
                 <div className="flex justify-between pt-1">
-                  <span className="text-stone-400 font-semibold">Total Paid/Due:</span>
+                  <span className="text-stone-400 font-semibold">Demo total:</span>
                   <span className="font-serif font-bold text-amber-400 text-sm">₹{grandTotal}</span>
                 </div>
               </div>
@@ -130,10 +112,10 @@ export default function CheckoutModal({ isOpen, onClose, cart, grandTotal, clear
               {/* ACTION BUTTONS */}
               <div className="pt-2 flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
                 <button
-                  onClick={handleSendWhatsAppOrder}
+                  onClick={handleViewOrderStatus}
                   className="w-full bg-green-600 hover:bg-green-500 text-white font-semibold py-3.5 rounded-full flex items-center justify-center gap-2 text-xs transition-all shadow-lg active:scale-95"
                 >
-                  <Send className="w-4 h-4" /> Send Receipt to WhatsApp
+                  View simulated order status
                 </button>
                 <button
                   onClick={onClose}
@@ -282,7 +264,7 @@ export default function CheckoutModal({ isOpen, onClose, cart, grandTotal, clear
                 </div>
                 <div className="text-right">
                   <span className="text-[10px] text-stone-400 flex items-center gap-1 justify-end">
-                    <ShieldCheck className="w-3.5 h-3.5 text-green-400" /> Encrypted Checkout
+                    <ShieldCheck className="w-3.5 h-3.5 text-amber-400" /> Demo only · No payment processed
                   </span>
                 </div>
               </div>
@@ -299,7 +281,7 @@ export default function CheckoutModal({ isOpen, onClose, cart, grandTotal, clear
               form="checkout-form"
               className="w-full bg-amber-500 hover:bg-amber-400 text-black font-semibold py-3.5 rounded-full text-sm transition-all shadow-lg shadow-amber-500/20 active:scale-95"
             >
-              Confirm Order & Pay ₹{grandTotal}
+              Place demo order · ₹{grandTotal}
             </button>
           </div>
         )}
