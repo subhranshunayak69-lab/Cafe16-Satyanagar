@@ -31,38 +31,41 @@ export default function Menu({ menuItems, addToCart, onOpenDishModal }) {
   });
 
   return (
-    <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-12">
+    <section className="max-w-7xl mx-auto px-4 lg:px-8 py-12">
+      
       {/* SECTION HEADER & SEARCH BAR */}
-      <div className="mb-8 flex flex-col justify-between gap-5 md:mb-9 md:flex-row md:items-end">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
         <div>
-          <span className="text-[10px] font-semibold uppercase tracking-[0.24em] text-amber-500">
+          <span className="text-xs font-semibold tracking-widest text-amber-500 uppercase">
             Crafted Fresh Daily
           </span>
-          <h2 className="mt-2 font-serif text-3xl font-bold text-white sm:text-4xl">
+          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-white mt-1">
             Bungalow Menu
           </h2>
-          <p className="mt-2 text-sm font-light text-stone-400 sm:text-base">
+          <p className="text-stone-400 text-sm mt-1 font-light">
             Gourmet comfort food, artisan brews, and signature Persian kababs.
           </p>
         </div>
 
         {/* SEARCH & DIETARY TOGGLES */}
-        <div className="flex w-full flex-col items-stretch gap-3 sm:flex-row md:w-auto md:items-center">
+        <div className="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto">
+          {/* SEARCH INPUT */}
           <div className="relative w-full sm:w-72">
-            <Search className="absolute left-3.5 top-3.5 h-4 w-4 text-stone-500" />
+            <Search className="w-4 h-4 absolute left-3.5 top-3.5 text-stone-500" />
             <input
               type="text"
               placeholder="Search dishes or brews..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full rounded-full border border-stone-800 bg-stone-900/90 py-2.5 pl-10 pr-4 text-sm text-white placeholder-stone-500 transition focus:border-amber-500 focus:outline-none"
+              className="w-full bg-stone-900/90 border border-stone-800 rounded-full pl-10 pr-4 py-2.5 text-sm text-white placeholder-stone-500 focus:outline-none focus:border-amber-500 transition-colors"
             />
           </div>
 
-          <div className="flex w-full items-center justify-center rounded-full border border-stone-800 bg-stone-900 p-1 sm:w-auto">
+          {/* DIET TOGGLES */}
+          <div className="flex items-center bg-stone-900 border border-stone-800 rounded-full p-1 w-full sm:w-auto justify-center">
             <button
               onClick={() => setDietaryFilter('all')}
-              className={`rounded-full px-3 py-1.5 text-xs font-medium transition-all ${
+              className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
                 dietaryFilter === 'all'
                   ? 'bg-stone-800 text-white font-semibold'
                   : 'text-stone-400 hover:text-white'
@@ -72,9 +75,9 @@ export default function Menu({ menuItems, addToCart, onOpenDishModal }) {
             </button>
             <button
               onClick={() => setDietaryFilter('veg')}
-              className={`rounded-full px-3 py-1.5 text-xs font-medium transition-all ${
+              className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
                 dietaryFilter === 'veg'
-                  ? 'border border-green-800/80 bg-green-950 text-green-400 font-semibold'
+                  ? 'bg-green-950 text-green-400 font-semibold border border-green-800/80'
                   : 'text-stone-400 hover:text-green-400'
               }`}
             >
@@ -82,9 +85,9 @@ export default function Menu({ menuItems, addToCart, onOpenDishModal }) {
             </button>
             <button
               onClick={() => setDietaryFilter('non-veg')}
-              className={`rounded-full px-3 py-1.5 text-xs font-medium transition-all ${
+              className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
                 dietaryFilter === 'non-veg'
-                  ? 'border border-red-800/80 bg-red-950 text-red-400 font-semibold'
+                  ? 'bg-red-950 text-red-400 font-semibold border border-red-800/80'
                   : 'text-stone-400 hover:text-red-400'
               }`}
             >
@@ -95,15 +98,15 @@ export default function Menu({ menuItems, addToCart, onOpenDishModal }) {
       </div>
 
       {/* CATEGORY BAR */}
-      <div className="mb-8 flex items-center gap-2 overflow-x-auto border-b border-stone-800/60 pb-4 no-scrollbar">
+      <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-8 no-scrollbar border-b border-stone-800/60">
         {categories.map((cat) => (
           <button
             key={cat}
             onClick={() => setSelectedCategory(cat)}
-            className={`whitespace-nowrap rounded-full px-4 py-2.5 text-xs font-medium transition-all sm:px-5 sm:text-sm ${
+            className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium whitespace-nowrap transition-all ${
               selectedCategory === cat
                 ? 'bg-amber-500 text-black font-semibold shadow-lg shadow-amber-500/20'
-                : 'border border-stone-800 bg-stone-900/80 text-stone-400 hover:border-stone-700 hover:text-white'
+                : 'bg-stone-900/80 text-stone-400 hover:text-white border border-stone-800 hover:border-stone-700'
             }`}
           >
             {cat}
@@ -131,11 +134,11 @@ export default function Menu({ menuItems, addToCart, onOpenDishModal }) {
           {filteredDishes.map((dish) => (
             <div
               key={dish.id}
-              className="group flex flex-col overflow-hidden rounded-[1.65rem] border border-stone-800/80 bg-stone-900/80 transition-all duration-300 hover:-translate-y-1 hover:border-amber-500/40 hover:shadow-[0_22px_40px_rgba(0,0,0,0.45)]"
+              className="bg-stone-900/80 border border-stone-800/80 rounded-2xl overflow-hidden hover:border-amber-500/40 transition-all duration-300 flex flex-col group hover:shadow-xl hover:shadow-black/50"
             >
               {/* IMAGE CONTAINER */}
-              <div
-                className="relative h-48 cursor-pointer overflow-hidden sm:h-52"
+              <div 
+                className="relative h-48 overflow-hidden cursor-pointer"
                 onClick={() => onOpenDishModal && onOpenDishModal(dish)}
               >
                 <img
@@ -170,31 +173,31 @@ export default function Menu({ menuItems, addToCart, onOpenDishModal }) {
               </div>
 
               {/* DETAILS & ACTION */}
-              <div className="flex flex-1 flex-col justify-between space-y-4 p-4 sm:p-4">
-                <div
-                  className="cursor-pointer"
+              <div className="p-4 flex-1 flex flex-col justify-between space-y-4">
+                <div 
+                  className="cursor-pointer" 
                   onClick={() => onOpenDishModal && onOpenDishModal(dish)}
                 >
-                  <h3 className="text-base font-semibold text-white transition-colors group-hover:text-amber-400">
+                  <h3 className="font-semibold text-base text-white group-hover:text-amber-400 transition-colors">
                     {dish.name}
                   </h3>
-                  <p className="mt-1 line-clamp-2 text-xs font-light leading-relaxed text-stone-400">
+                  <p className="text-stone-400 text-xs line-clamp-2 mt-1 font-light leading-relaxed">
                     {dish.description}
                   </p>
                 </div>
 
-                <div className="flex items-center justify-between border-t border-stone-800/80 pt-3">
+                <div className="flex items-center justify-between pt-3 border-t border-stone-800/80">
                   <div>
-                    <span className="font-serif text-lg font-bold text-white">₹{dish.price}</span>
-                    <span className="mt-0.5 block text-[10px] text-stone-500">{dish.prepTime}</span>
+                    <span className="font-serif font-bold text-lg text-white">₹{dish.price}</span>
+                    <span className="text-[10px] text-stone-500 block">{dish.prepTime}</span>
                   </div>
 
                   <button
                     onClick={() => addToCart(dish)}
                     disabled={dish.isAvailable === false}
-                    className="flex items-center gap-1.5 rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-2 text-xs font-semibold text-amber-400 shadow-sm transition-all hover:bg-amber-500 hover:text-black active:scale-95 disabled:cursor-not-allowed disabled:opacity-50"
+                    className="bg-amber-500/10 hover:bg-amber-500 text-amber-400 hover:text-black border border-amber-500/30 text-xs font-semibold px-4 py-2 rounded-xl transition-all flex items-center gap-1.5 active:scale-95 shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {dish.isAvailable === false ? 'Sold out' : <><Plus className="h-3.5 w-3.5" /> Add</>}
+                    {dish.isAvailable === false ? 'Sold out' : <><Plus className="w-3.5 h-3.5" /> Add</>}
                   </button>
                 </div>
               </div>
