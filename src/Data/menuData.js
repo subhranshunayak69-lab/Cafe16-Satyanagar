@@ -182,7 +182,7 @@ export const INITIAL_MENU = [
     prepTime: "15-18 mins",
     calories: 520,
     description: "Penne pasta tossed in rich parmesan garlic cream sauce with grilled chicken breast and herbs.",
-    image: "https://images.unsplash.com/photo-1621996346565-e3def646d9a1?auto=format&fit=crop&q=80&w=800"
+    image: "https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?auto=format&fit=crop&q=85&w=900"
   },
 
   // DESSERTS & BAKERY

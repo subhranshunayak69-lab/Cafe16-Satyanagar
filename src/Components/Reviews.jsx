@@ -27,7 +27,7 @@ export default function Reviews() {
     },
     {
       id: 3,
-      name: 'Siddharth & Dipika',
+      name: 'Subhranshu & Dipika',
       rating: 5,
       date: '2 weeks ago',
       comment:
