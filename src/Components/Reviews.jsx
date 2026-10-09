@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Star, MessageSquareQuote, ThumbsUp, Sparkles, CheckCircle2, User, Send } from 'lucide-react';
+import { useState } from 'react';
+import { Star, ThumbsUp, Sparkles, CheckCircle2, Send } from 'lucide-react';
 
 export default function Reviews() {
   const [reviewsList, setReviewsList] = useState([
